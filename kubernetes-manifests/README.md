@@ -1,3 +1,9 @@
+---
+noteId: "7fbfe2422e2911eabb58e10a02f731c6"
+tags: []
+
+---
+
 # ./kubernetes-manifests
 
 :warning: Kubernetes manifests provided in this directory are not directly

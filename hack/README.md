@@ -1,3 +1,9 @@
+---
+noteId: "7fbfe2402e2911eabb58e10a02f731c6"
+tags: []
+
+---
+
 ## `hack/` 
 
 This directory provides scripts for building and pushing Docker images, and tagging new demo

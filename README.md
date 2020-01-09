@@ -1,3 +1,9 @@
+---
+noteId: "7fc030612e2911eabb58e10a02f731c6"
+tags: []
+
+---
+
 # Hipster Shop: Cloud-Native Microservices Demo Application
 
 This project contains a 10-tier microservices application. The application is a

@@ -51,6 +51,8 @@ spec:
       volumes:
       - name: redis-data
         emptyDir: {}
+      imagePullSecrets:
+      - name: gcr-json-key
 ---
 apiVersion: v1
 kind: Service

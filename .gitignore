@@ -9,3 +9,5 @@ pkg/
 .idea
 .skaffold-*.yaml
 .kubernetes-manifests-*/
+
+hipstershop-264010-92ff6e0d32c5.json

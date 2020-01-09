@@ -29,6 +29,7 @@ spec:
       containers:
       - name: server
         image: cartservice
+        imagePullPolicy: Always
         ports:
         - containerPort: 7070
         env:
@@ -54,6 +55,8 @@ spec:
           periodSeconds: 10
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:7070", "-rpc-timeout=5s"]
+      imagePullSecrets:
+      - name: gcr-json-key
 ---
 apiVersion: v1
 kind: Service

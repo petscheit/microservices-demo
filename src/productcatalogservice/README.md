@@ -1,3 +1,9 @@
+---
+noteId: "7fc030622e2911eabb58e10a02f731c6"
+tags: []
+
+---
+
 # productcatalogservice
 
 Run the following command to restore dependencies to `vendor/` directory:

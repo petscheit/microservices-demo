@@ -1,3 +1,9 @@
+---
+noteId: "7fc009512e2911eabb58e10a02f731c6"
+tags: []
+
+---
+
 # Ad Service
 
 The Ad service provides advertisement based on context keys. If no context keys are provided then it returns random ads.

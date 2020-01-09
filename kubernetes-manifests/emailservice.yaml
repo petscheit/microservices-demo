@@ -29,6 +29,7 @@ spec:
       containers:
       - name: server
         image: emailservice
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
@@ -51,6 +52,8 @@ spec:
           limits:
             cpu: 200m
             memory: 128Mi
+      imagePullSecrets:
+      - name: gcr-json-key
 ---
 apiVersion: v1
 kind: Service

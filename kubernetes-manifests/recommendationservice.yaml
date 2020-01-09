@@ -29,6 +29,7 @@ spec:
       containers:
       - name: server
         image: recommendationservice
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -53,6 +54,8 @@ spec:
           limits:
             cpu: 200m
             memory: 450Mi
+      imagePullSecrets:
+      - name: gcr-json-key
 ---
 apiVersion: v1
 kind: Service

@@ -1,3 +1,9 @@
+---
+noteId: "7fbfe2412e2911eabb58e10a02f731c6"
+tags: []
+
+---
+
 # Development Principles
 
 > **Note:** This document outlines guidances behind some development decisions

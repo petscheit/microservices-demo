@@ -5,26 +5,13 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - checkout
-      - run: |
-          echo $GCP_PROJECT_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
-          gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json --project $GOOGLE_PROJECT_ID
-          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-          gcloud container clusters get-credentials $CLUSTER_NAME
-          gcloud builds submit --config=cloudbuild.yaml
-          kubectl apply -f release/kubernetes-manifests.yaml
-          # kubectl set image deployments/frontend server=gcr.io/hipstershop-264010/frontend:latest
-          # kubectl set image deployments/adservice server=gcr.io/hipstershop-264010/adservice:latest
-          # kubectl set image deployments/cartservice server=gcr.io/hipstershop-264010/cartservice:latest
-          # kubectl set image deployments/checkoutservice server=gcr.io/hipstershop-264010/checkoutservice:latest
-          # kubectl set image deployments/currencyservice server=gcr.io/hipstershop-264010/currencyservice:latest
-          # kubectl set image deployments/emailservice server=gcr.io/hipstershop-264010/emailservice:latest
-          # kubectl set image deployments/loadgenerator main=gcr.io/hipstershop-264010/loadgenerator:latest
-          # kubectl set image deployments/paymentservice server=gcr.io/hipstershop-264010/paymentservice:latest
-          # kubectl set image deployments/productcatalogservice server=gcr.io/hipstershop-264010/productcatalogservice:latest
-          # kubectl set image deployments/recommendationservice server=gcr.io/hipstershop-264010/recommendationservice:latest
-          # kubectl set image deployments/redis-cart redis=redis:alpine
-          # kubectl set image deployments/shippingservice server=gcr.io/hipstershop-264010/shippingservice:latest
-          # kubectl set image deployments/ratingservice server=gcr.io/hipstershop-264010/ratingservice:latest
+      - run: echo $GCP_PROJECT_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
+      - run: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json --project $GOOGLE_PROJECT_ID
+      - run: gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+      - run: gcloud container clusters get-credentials $CLUSTER_NAME
+      - run: gcloud builds submit --config=cloudbuild.yaml
+      - run: TAG=latest REPO_PREFIX=gcr.io/hipstershop-264010 ./hack/make-release-artifacts.sh
+      - run: kubectl apply -f release/kubernetes-manifests.yaml
 workflows:
   version: 2.1
   main:

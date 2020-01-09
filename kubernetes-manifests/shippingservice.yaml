@@ -28,7 +28,6 @@ spec:
       containers:
       - name: server
         image: shippingservice
-        imagePullPolicy: Always
         ports:
         - containerPort: 50051
         env:

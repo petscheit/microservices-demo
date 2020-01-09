@@ -29,7 +29,6 @@ spec:
       containers:
       - name: server
         image: recommendationservice
-        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         readinessProbe:

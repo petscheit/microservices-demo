@@ -28,8 +28,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 
-	pb "github.com/GoogleCloudPlatform/microservices-demo/src/frontend/genproto"
-	"github.com/GoogleCloudPlatform/microservices-demo/src/frontend/money"
+	"github.com/petscheit/microservices-demo/src/frontend/money"
+	pb "github.com/petscheit/microservices-demo/src/frontend/genproto"
 )
 
 var (
@@ -319,6 +319,13 @@ func (fe *frontendServer) logoutHandler(w http.ResponseWriter, r *http.Request) 
 		c.MaxAge = -1
 		http.SetCookie(w, c)
 	}
+	w.Header().Set("Location", "/")
+	w.WriteHeader(http.StatusFound)
+}
+
+func (fe *frontendServer) ratingHandler(w http.ResponseWriter, r *http.Request) {
+	log := r.Context().Value(ctxKeyLog{}).(logrus.FieldLogger)
+	log.Debug("~~~~~~~~~HERE~~~~~~~~")
 	w.Header().Set("Location", "/")
 	w.WriteHeader(http.StatusFound)
 }

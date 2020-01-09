@@ -33,17 +33,6 @@
   source = "github.com/apache/thrift"
 
 [[projects]]
-  digest = "1:c4f0a05580fb5d27e1cc8f5723a8d33fd97590a931e845f23b104e05c02ea80b"
-  name = "github.com/GoogleCloudPlatform/microservices-demo"
-  packages = [
-    "src/frontend/genproto",
-    "src/frontend/money",
-  ]
-  pruneopts = "UT"
-  revision = "27df445fc20f048c1c31e429f6c29075119fe454"
-  version = "v0.1.1"
-
-[[projects]]
   digest = "1:1d3ad0f6a57c08e2168089a64c34313930571fcbe5359d71c608a97ce504f7ca"
   name = "github.com/golang/protobuf"
   packages = [
@@ -333,8 +322,6 @@
   input-imports = [
     "cloud.google.com/go/profiler",
     "contrib.go.opencensus.io/exporter/stackdriver",
-    "github.com/GoogleCloudPlatform/microservices-demo/src/frontend/genproto",
-    "github.com/GoogleCloudPlatform/microservices-demo/src/frontend/money",
     "github.com/golang/protobuf/proto",
     "github.com/google/uuid",
     "github.com/gorilla/mux",
@@ -346,8 +333,9 @@
     "go.opencensus.io/plugin/ochttp/propagation/b3",
     "go.opencensus.io/stats/view",
     "go.opencensus.io/trace",
-    "golang.org/x/net/context",
     "google.golang.org/grpc",
+    "google.golang.org/grpc/codes",
+    "google.golang.org/grpc/status",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

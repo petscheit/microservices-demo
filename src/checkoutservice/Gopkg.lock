@@ -25,26 +25,15 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:a85b0dc359de4812d383ee6670f0dae595cfcb8b13ff6b872bdb013a18c37b07"
+  digest = "1:ba1b6f658adae5251d1fc139f3bb73bf0a56447339c6d11d9718ff11b7a71f73"
   name = "git.apache.org/thrift.git"
   packages = ["lib/go/thrift"]
   pruneopts = "UT"
-  revision = "286eee16b147a302ddc7b10740c5e5401ebbec17"
+  revision = "45a94594ff50ad51a18f6ad1900209e978e5921b"
   source = "github.com/apache/thrift"
 
 [[projects]]
-  digest = "1:4287343c81d259e828b2e3b579270139a498a2168fbab81d89c3b9926b4ec740"
-  name = "github.com/GoogleCloudPlatform/microservices-demo"
-  packages = [
-    "src/checkoutservice/genproto",
-    "src/checkoutservice/money",
-  ]
-  pruneopts = "UT"
-  revision = "27df445fc20f048c1c31e429f6c29075119fe454"
-  version = "v0.1.1"
-
-[[projects]]
-  digest = "1:1d3ad0f6a57c08e2168089a64c34313930571fcbe5359d71c608a97ce504f7ca"
+  digest = "1:68f0ad2c2af816280679ccac300f7b765fb6a6567fa949e07fb4c7125a6a6398"
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
@@ -58,8 +47,22 @@
     "ptypes/wrappers",
   ]
   pruneopts = "UT"
-  revision = "b5d812f8a3706043e23a9cd5babf2e5423744d30"
-  version = "v1.3.1"
+  revision = "6c65a5562fc06764971b7c5d05c76c75e84bdbf7"
+  version = "v1.3.2"
+
+[[projects]]
+  digest = "1:0aeda02073125667ac6c9df50c7921cb22c08a4accdc54589c697a7e76be65c2"
+  name = "github.com/google/go-cmp"
+  packages = [
+    "cmp",
+    "cmp/internal/diff",
+    "cmp/internal/flags",
+    "cmp/internal/function",
+    "cmp/internal/value",
+  ]
+  pruneopts = "UT"
+  revision = "5a6f75716e1203a923a78c9efb94089d857df0f6"
+  version = "v0.4.0"
 
 [[projects]]
   branch = "master"
@@ -67,7 +70,7 @@
   name = "github.com/google/pprof"
   packages = ["profile"]
   pruneopts = "UT"
-  revision = "54271f7e092ff31b10b7626fee166cbc6304e350"
+  revision = "d4f498aebedc02388a1c34ebe8dcb2e7c9e99f29"
 
 [[projects]]
   digest = "1:582b704bebaa06b48c29b0cec224a6058a09c86883aaddabde889cd1a5f73e1b"
@@ -128,7 +131,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:2f357867bf425774d35beca5be718402a4488b8b23b1563ce8c5bb91d09285a7"
+  digest = "1:676f320d34ccfa88bfa6d04bdf388ed7062af175355c805ef57ccda1a3f13432"
   name = "golang.org/x/net"
   packages = [
     "context",
@@ -141,11 +144,11 @@
     "trace",
   ]
   pruneopts = "UT"
-  revision = "da137c7871d730100384dbcf36e6f8fa493aef5b"
+  revision = "c0dbc17a35534bf2e581d7a942408dc936316da4"
 
 [[projects]]
   branch = "master"
-  digest = "1:31e33f76456ccf54819ab4a646cf01271d1a99d7712ab84bf1a9e7b61cd2031b"
+  digest = "1:79edde3241bb55de9f4143d5083bfcff722e550c3cb8db94084eab50d0e440b5"
   name = "golang.org/x/oauth2"
   packages = [
     ".",
@@ -155,7 +158,7 @@
     "jwt",
   ]
   pruneopts = "UT"
-  revision = "0f29369cfe4552d0e4bcddc57cc75f4d7e672a33"
+  revision = "bf48bf16ab8d622ce64ec6ce98d2c98f916b6303"
 
 [[projects]]
   branch = "master"
@@ -163,15 +166,15 @@
   name = "golang.org/x/sync"
   packages = ["semaphore"]
   pruneopts = "UT"
-  revision = "112230192c580c3556b8cee6403af37a4fc5f28c"
+  revision = "cd5d95a43a6e21273425c7ae415d3df9ea832eeb"
 
 [[projects]]
   branch = "master"
-  digest = "1:730ba27cd66db3b98ec8f51a6f20d45ec277d490cca36b1f54e31d3fcaf4840e"
+  digest = "1:e13350b7207ecc34977340d53522e0335dd36ed86ca7c346a36d2e88eb0fadfc"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "04f50cda93cbb67f2afa353c52f342100e80e625"
+  revision = "548cf772de5052aa878ccb47cdeb7d262b75c8ec"
 
 [[projects]]
   digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
@@ -200,7 +203,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:bc06b12d8436550fccc0212037e9281a7e4d53db25c2349eb3cc6c3457e0406b"
+  digest = "1:74d204809df594e103e7272cd9d500cc2754a000ea68f5f6638719d49357a916"
   name = "google.golang.org/api"
   packages = [
     "googleapi/transport",
@@ -214,10 +217,10 @@
     "transport/http/internal/propagation",
   ]
   pruneopts = "UT"
-  revision = "aae1d1b89c27132abe4fa22731a2a61e7089079c"
+  revision = "64f53cc407027fc5c680faf0e33aae2a6bbdf18f"
 
 [[projects]]
-  digest = "1:2c26b1c47556c0e5e73cdb05d8361c463737eee4baac35d38b40c728c3074a94"
+  digest = "1:c98e9b93e6d178378530b920fe6e1aa4b3dd4972872111e83827746aa1f33ded"
   name = "google.golang.org/appengine"
   packages = [
     ".",
@@ -234,12 +237,12 @@
     "urlfetch",
   ]
   pruneopts = "UT"
-  revision = "b2f4a3cf3c67576a2ee09e1fe62656a5086ce880"
-  version = "v1.6.1"
+  revision = "971852bfffca25b069c31162ae8f247a3dba083b"
+  version = "v1.6.5"
 
 [[projects]]
   branch = "master"
-  digest = "1:cb0f37e3cdf50a27abbf33a48797b30786239d4fd69dbfbbc63cfa19d400d3ce"
+  digest = "1:59eaaecca4d33004cdbdfa7e83219447f939efdda05101990ee0166aac2a0caf"
   name = "google.golang.org/genproto"
   packages = [
     "googleapis/api",
@@ -253,16 +256,19 @@
     "googleapis/monitoring/v3",
     "googleapis/rpc/errdetails",
     "googleapis/rpc/status",
+    "googleapis/type/calendarperiod",
     "protobuf/field_mask",
   ]
   pruneopts = "UT"
-  revision = "3bdd9d9f5532d75d09efb230bd767d265245cfe5"
+  revision = "bd8f9a0ef82f9870cb10caef4f23c348069600cb"
 
 [[projects]]
-  digest = "1:f379776e36e55e5b5cbf7187ea58280812785071de53046230006e47894650b6"
+  digest = "1:ea720c4718ddd90764dc1b45574cda3f196bb42110431c3aee2f3b1caeb25063"
   name = "google.golang.org/grpc"
   packages = [
     ".",
+    "attributes",
+    "backoff",
     "balancer",
     "balancer/base",
     "balancer/grpclb",
@@ -290,10 +296,13 @@
     "internal/backoff",
     "internal/balancerload",
     "internal/binarylog",
+    "internal/buffer",
     "internal/channelz",
     "internal/envconfig",
     "internal/grpcrand",
     "internal/grpcsync",
+    "internal/resolver/dns",
+    "internal/resolver/passthrough",
     "internal/syscall",
     "internal/transport",
     "keepalive",
@@ -301,16 +310,14 @@
     "naming",
     "peer",
     "resolver",
-    "resolver/dns",
-    "resolver/passthrough",
     "serviceconfig",
     "stats",
     "status",
     "tap",
   ]
   pruneopts = "UT"
-  revision = "1d89a3c832915b2314551c1d2a506874d62e53f7"
-  version = "v1.22.0"
+  revision = "f5b0812e6fe574d90da76b205e9eb51f6ddb1919"
+  version = "v1.26.0"
 
 [solve-meta]
   analyzer-name = "dep"
@@ -318,8 +325,6 @@
   input-imports = [
     "cloud.google.com/go/profiler",
     "contrib.go.opencensus.io/exporter/stackdriver",
-    "github.com/GoogleCloudPlatform/microservices-demo/src/checkoutservice/genproto",
-    "github.com/GoogleCloudPlatform/microservices-demo/src/checkoutservice/money",
     "github.com/golang/protobuf/proto",
     "github.com/google/uuid",
     "github.com/sirupsen/logrus",
@@ -327,7 +332,6 @@
     "go.opencensus.io/plugin/ocgrpc",
     "go.opencensus.io/stats/view",
     "go.opencensus.io/trace",
-    "golang.org/x/net/context",
     "google.golang.org/grpc",
     "google.golang.org/grpc/codes",
     "google.golang.org/grpc/health/grpc_health_v1",

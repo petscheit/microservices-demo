@@ -33,14 +33,6 @@
   source = "github.com/apache/thrift"
 
 [[projects]]
-  digest = "1:9370265bab17bdc207051ccedc34535484a12622a329839e580059c79236c1e3"
-  name = "github.com/GoogleCloudPlatform/microservices-demo"
-  packages = ["src/productcatalogservice/genproto"]
-  pruneopts = "UT"
-  revision = "27df445fc20f048c1c31e429f6c29075119fe454"
-  version = "v0.1.1"
-
-[[projects]]
   digest = "1:fd0a0705475581c7eb965259d417706cb49f42bde408502c3b53f139b7253d67"
   name = "github.com/golang/protobuf"
   packages = [
@@ -321,7 +313,6 @@
   input-imports = [
     "cloud.google.com/go/profiler",
     "contrib.go.opencensus.io/exporter/stackdriver",
-    "github.com/GoogleCloudPlatform/microservices-demo/src/productcatalogservice/genproto",
     "github.com/golang/protobuf/jsonpb",
     "github.com/golang/protobuf/proto",
     "github.com/google/go-cmp/cmp",

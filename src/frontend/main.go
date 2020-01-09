@@ -78,6 +78,9 @@ type frontendServer struct {
 
 	adSvcAddr string
 	adSvcConn *grpc.ClientConn
+
+	ratingSvcAddr string
+	ratingSvcConn *grpc.ClientConn
 }
 
 func main() {
@@ -106,6 +109,7 @@ func main() {
 	mustMapEnv(&svc.productCatalogSvcAddr, "PRODUCT_CATALOG_SERVICE_ADDR")
 	mustMapEnv(&svc.currencySvcAddr, "CURRENCY_SERVICE_ADDR")
 	mustMapEnv(&svc.cartSvcAddr, "CART_SERVICE_ADDR")
+	mustMapEnv(&svc.ratingSvcAddr, "RATING_SERVICE_ADDR")
 	mustMapEnv(&svc.recommendationSvcAddr, "RECOMMENDATION_SERVICE_ADDR")
 	mustMapEnv(&svc.checkoutSvcAddr, "CHECKOUT_SERVICE_ADDR")
 	mustMapEnv(&svc.shippingSvcAddr, "SHIPPING_SERVICE_ADDR")
@@ -114,6 +118,7 @@ func main() {
 	mustConnGRPC(ctx, &svc.currencySvcConn, svc.currencySvcAddr)
 	mustConnGRPC(ctx, &svc.productCatalogSvcConn, svc.productCatalogSvcAddr)
 	mustConnGRPC(ctx, &svc.cartSvcConn, svc.cartSvcAddr)
+	mustConnGRPC(ctx, &svc.ratingSvcConn, svc.ratingSvcAddr)
 	mustConnGRPC(ctx, &svc.recommendationSvcConn, svc.recommendationSvcAddr)
 	mustConnGRPC(ctx, &svc.shippingSvcConn, svc.shippingSvcAddr)
 	mustConnGRPC(ctx, &svc.checkoutSvcConn, svc.checkoutSvcAddr)
@@ -122,6 +127,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", svc.homeHandler).Methods(http.MethodGet, http.MethodHead)
 	r.HandleFunc("/product/{id}", svc.productHandler).Methods(http.MethodGet, http.MethodHead)
+	r.HandleFunc("/ratings/{productId}", svc.ratingHandler).Methods(http.MethodPost)
 	r.HandleFunc("/cart", svc.viewCartHandler).Methods(http.MethodGet, http.MethodHead)
 	r.HandleFunc("/cart", svc.addToCartHandler).Methods(http.MethodPost)
 	r.HandleFunc("/cart/empty", svc.emptyCartHandler).Methods(http.MethodPost)

@@ -21,7 +21,7 @@ jobs:
           kubectl set image deployments/paymentservice server=gcr.io/hipstershop-264010/paymentservice:latest
           kubectl set image deployments/productcatalogservice server=gcr.io/hipstershop-264010/productcatalogservice:latest
           kubectl set image deployments/recommendationservice server=gcr.io/hipstershop-264010/recommendationservice:latest
-          kubectl set image deployments/redis-cart server=gcr.io/hipstershop-264010/redis-cart:latest
+          kubectl set image deployments/redis-cart redis=gcr.io/hipstershop-264010/redis-cart:latest
           kubectl set image deployments/shippingservice server=gcr.io/hipstershop-264010/shippingservice:latest
 workflows:
   version: 2.1

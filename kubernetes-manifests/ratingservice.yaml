@@ -15,35 +15,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: emailservice
+  name: ratingservice
 spec:
   selector:
     matchLabels:
-      app: emailservice
+      app: ratingservice
   template:
     metadata:
       labels:
-        app: emailservice
+        app: ratingservice
     spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: emailservice
+        image: ratingservice
         ports:
-        - containerPort: 8080
+        - name: grpc
+          containerPort: 7000
         env:
         - name: PORT
-          value: "8080"
-        - name: ENABLE_PROFILER
-          value: "0"
+          value: "7000"
         readinessProbe:
-          periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+            command: ["/bin/grpc_health_probe", "-addr=:7000"]
         livenessProbe:
-          periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+            command: ["/bin/grpc_health_probe", "-addr=:7000"]
         resources:
           requests:
             cpu: 100m
@@ -57,12 +54,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: emailservice
+  name: ratingservice
 spec:
   type: ClusterIP
   selector:
-    app: emailservice
+    app: ratingservice
   ports:
   - name: grpc
-    port: 5000
-    targetPort: 8080
+    port: 7000
+    targetPort: 7000

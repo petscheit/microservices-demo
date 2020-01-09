@@ -29,7 +29,6 @@ spec:
       containers:
       - name: server
         image: cartservice
-        imagePullPolicy: Always
         ports:
         - containerPort: 7070
         env:

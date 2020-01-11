@@ -28,8 +28,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 
-	"github.com/petscheit/microservices-demo/src/frontend/money"
 	pb "github.com/petscheit/microservices-demo/src/frontend/genproto"
+	"github.com/petscheit/microservices-demo/src/frontend/money"
 )
 
 var (
@@ -59,8 +59,10 @@ func (fe *frontendServer) homeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	type productView struct {
-		Item  *pb.Product
-		Price *pb.Money
+		Item    *pb.Product
+		Price   *pb.Money
+		Ratings int32
+		Rating  float32
 	}
 	ps := make([]productView, len(products))
 	for i, p := range products {
@@ -69,7 +71,12 @@ func (fe *frontendServer) homeHandler(w http.ResponseWriter, r *http.Request) {
 			renderHTTPError(log, r, w, errors.Wrapf(err, "failed to do currency conversion for product %s", p.GetId()), http.StatusInternalServerError)
 			return
 		}
-		ps[i] = productView{p, price}
+		ratings, err := fe.getRatings(r.Context(), p.Id)
+		if err != nil {
+			renderHTTPError(log, r, w, errors.Wrap(err, "could not retrieve ratings"), http.StatusInternalServerError)
+			return
+		}
+		ps[i] = productView{p, price, ratings.Amount, ratings.Average}
 	}
 
 	if err := templates.ExecuteTemplate(w, "home", map[string]interface{}{
@@ -125,6 +132,12 @@ func (fe *frontendServer) productHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	ratings, err := fe.getRatings(r.Context(), id)
+	if err != nil {
+		renderHTTPError(log, r, w, errors.Wrap(err, "could not retrieve ratings"), http.StatusInternalServerError)
+		return
+	}
+
 	product := struct {
 		Item  *pb.Product
 		Price *pb.Money
@@ -139,6 +152,8 @@ func (fe *frontendServer) productHandler(w http.ResponseWriter, r *http.Request)
 		"product":         product,
 		"recommendations": recommendations,
 		"cart_size":       len(cart),
+		"rating":          ratings.Average,
+		"ratings":         ratings.Amount,
 	}); err != nil {
 		log.Println(err)
 	}
@@ -325,9 +340,26 @@ func (fe *frontendServer) logoutHandler(w http.ResponseWriter, r *http.Request) 
 
 func (fe *frontendServer) ratingHandler(w http.ResponseWriter, r *http.Request) {
 	log := r.Context().Value(ctxKeyLog{}).(logrus.FieldLogger)
-	log.Debug("~~~~~~~~~HERE~~~~~~~~")
-	w.Header().Set("Location", "/")
-	w.WriteHeader(http.StatusFound)
+
+	productid := mux.Vars(r)["id"]
+	rating, _ := strconv.ParseUint(r.FormValue("rating"), 10, 32)
+
+	if productid == "" {
+		renderHTTPError(log, r, w, errors.New("product id not specified"), http.StatusBadRequest)
+		return
+	}
+	if rating == 0 {
+		renderHTTPError(log, r, w, errors.New("invalid form input"), http.StatusBadRequest)
+		return
+	}
+	log.WithField("product id", productid).WithField("rating", rating)
+
+	err := fe.addRating(r.Context(), productid, int32(rating))
+	if err != nil {
+		renderHTTPError(log, r, w, errors.Wrap(err, "could not add rating"), http.StatusInternalServerError)
+		return
+	}
+	fe.productHandler(w, r)
 }
 
 func (fe *frontendServer) setCurrencyHandler(w http.ResponseWriter, r *http.Request) {

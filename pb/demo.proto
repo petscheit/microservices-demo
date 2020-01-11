@@ -4,18 +4,22 @@ package hipstershop;
 
 // -----------------Rating service-----------------
 service RatingService {
-    rpc GetRatings(Empty) returns (RatingMetaItem) {}
+    rpc GetRatings(GetRatingsRequest) returns (RatingMetaItem) {}
     rpc AddRating(AddRatingRequest) returns (Empty) {}
+}
+
+message RatingMetaItem {
+    int32 amount = 1;
+    float average = 2;
+}
+
+message GetRatingsRequest {
+    string product_id = 1;
 }
 
 message Rating {
     string product_id = 1;
     int32 rating = 2;
-}
-
-message RatingMetaItem {
-    repeated Rating ratings = 1;
-    float average = 2;
 }
 
 message AddRatingRequest {

@@ -4,7 +4,6 @@ RUN apk add --no-cache ca-certificates git && \
       chmod +x /go/bin/dep
 
 ENV PROJECT github.com/petscheit/microservices-demo/src/checkoutservice
-
 WORKDIR /go/src/$PROJECT
 
 # restore dependencies

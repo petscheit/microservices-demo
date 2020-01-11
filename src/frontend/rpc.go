@@ -48,16 +48,27 @@ func (fe *frontendServer) getProducts(ctx context.Context) ([]*pb.Product, error
 	return resp.GetProducts(), err
 }
 
-func (fe *frontendServer) getRatings(ctx context.Context) (*pb.RatingMetaItem, error) {
-	resp, err := pb.NewRatingServiceClient(fe.ratingSvcConn).
-		GetRatings(ctx, &pb.Empty{})
-	return resp, err
-}
-
 func (fe *frontendServer) getProduct(ctx context.Context, id string) (*pb.Product, error) {
 	resp, err := pb.NewProductCatalogServiceClient(fe.productCatalogSvcConn).
 		GetProduct(ctx, &pb.GetProductRequest{Id: id})
 	return resp, err
+}
+
+func (fe *frontendServer) getRatings(ctx context.Context, productID string) (*pb.RatingMetaItem, error) {
+	resp, err := pb.NewRatingServiceClient(fe.ratingSvcConn).GetRatings(ctx, &pb.GetRatingsRequest{
+		ProductId: productID,
+	})
+	return resp, err
+}
+
+func (fe *frontendServer) addRating(ctx context.Context, productID string, rating int32) error {
+	_, err := pb.NewRatingServiceClient(fe.ratingSvcConn).AddRating(ctx, &pb.AddRatingRequest{
+		Rating: &pb.Rating{
+			ProductId: productID,
+			Rating:    rating,
+		},
+	})
+	return err
 }
 
 func (fe *frontendServer) getCart(ctx context.Context, userID string) ([]*pb.CartItem, error) {

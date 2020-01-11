@@ -1,56 +1,77 @@
 {{ define "product" }}
-    {{ template "header" . }}
+{{ template "header" . }}
 
-    <main role="main">
-        <div class="py-5">
-            <div class="container bg-light py-3 px-lg-5 py-lg-5">
-                <div class="row">
-                    <div class="col-12 col-lg-5">
-                            <img class="img-fluid border" style="width: 100%;"
-                            src="{{$.product.Item.Picture}}" />
-                    </div>
-                    <div class="col-12 col-lg-7">
-                            <h2>{{$.product.Item.Name}}</h2>
-                            
-                            <p class="text-muted">
-                                {{ renderMoney $.product.Price}}
-                            </p>
-                            <hr/>
-                            <p>
-                                <h6>Product Description:</h6>
-                                {{$.product.Item.Description}}
-                            </p>
-                            <hr/>
-
-                            <form method="POST" action="/cart" class="form-inline text-muted">
-                                <input type="hidden" name="product_id" value="{{$.product.Item.Id}}"/>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text" for="quantity">Quantity</label>
-                                    </div>
-                                    <select name="quantity" id="quantity" class="custom-select form-control form-control-lg">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>10</option>
-                                    </select>
-                                    <button type="submit" class="btn btn-info btn-lg ml-3">Add to Cart</button>
-                                </div>
-                            </form>
-                    </div>
+<main role="main">
+    <div class="py-5">
+        <div class="container bg-light py-3 px-lg-5 py-lg-5">
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <img class="img-fluid border" style="width: 100%;" src="{{$.product.Item.Picture}}" />
                 </div>
-                
-                {{ if $.recommendations}}
-                    <hr/>
-                    {{ template "recommendations" $.recommendations }}
-                {{ end }}
-                
-                {{ with $.ad }}{{ template "text_ad" . }}{{ end}}
+                <div class="col-12 col-lg-7">
+                    <h2>{{$.product.Item.Name}}</h2>
+
+                    <p class="text-muted" style="margin-bottom: 0px;">
+                        {{ renderMoney $.product.Price}}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p>
+                            <span class="fa fa-star{{ if ge $.rating 1.0 }} checked{{ end }}"></span>
+                            <span class="fa fa-star{{ if ge $.rating 2.0 }} checked{{ end }}"></span>
+                            <span class="fa fa-star{{ if ge $.rating 3.0 }} checked{{ end }}"></span>
+                            <span class="fa fa-star{{ if ge $.rating 4.0 }} checked{{ end }}"></span>
+                            <span class="fa fa-star{{ if ge $.rating 5.0 }} checked{{ end }}"></span>
+                            <span class="text-muted">{{ $.ratings }} ratings</span>
+                        </p>
+                        <form method="POST" action="/ratings/{{$.product.Item.Id}}" class="form-inline text-muted">
+                            <div class="input-group">
+                                <select name="rating" id="rating" class="custom-select form-control form-control-lg">
+                                    <option value="1">1 ⭐️</option>
+                                    <option value="2">2 ⭐️</option>
+                                    <option value="3">3 ⭐️</option>
+                                    <option value="4">4 ⭐️</option>
+                                    <option value="5" selected>5 ⭐️</option>
+                                </select>
+                                <button type="submit" class="btn btn-info btn-lg ml-3">Rate</button>
+                            </div>
+                        </form>
+                    </div>
+                    <hr />
+                    <p>
+                        <h6>Product Description:</h6>
+                        {{$.product.Item.Description}}
+                    </p>
+                    <hr />
+
+                    <form method="POST" action="/cart" class="form-inline text-muted">
+                        <input type="hidden" name="product_id" value="{{$.product.Item.Id}}" />
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="quantity">Quantity</label>
+                            </div>
+                            <select name="quantity" id="quantity" class="custom-select form-control form-control-lg">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>10</option>
+                            </select>
+                            <button type="submit" class="btn btn-info btn-lg ml-3">Add to Cart</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+
+            {{ if $.recommendations}}
+            <hr />
+            {{ template "recommendations" $.recommendations }}
+            {{ end }}
+
+            {{ with $.ad }}{{ template "text_ad" . }}{{ end}}
         </div>
-    
-    </main>
-    {{ template "footer" . }}
+    </div>
+
+</main>
+{{ template "footer" . }}
 {{ end }}

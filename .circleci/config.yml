@@ -8,6 +8,8 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - checkout
+      # executes tests for ratingservice
+      - run: cd src/ratingservice/ && npm install && npm test && cd ../../
       # creates api key json file from base64 encoded env
       - run: echo $GCP_PROJECT_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
       # authenticates at GCP

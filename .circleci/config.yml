@@ -1,9 +1,6 @@
 version: 2.1
 jobs:
   deploy:
-    branches:
-      only:
-        - master
     docker:
       - image: google/cloud-sdk
     steps:

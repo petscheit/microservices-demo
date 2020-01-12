@@ -81,7 +81,7 @@ const writeRatingsToDb = (ratings) => {
 }
 
 /**
- * addRating
+ * Function adds rating for specific product and stores them in simulated db. Empty callback is called.
  */
 function addRating(call, callback) {
   logger.info('received ratings request');
@@ -111,7 +111,7 @@ function addRating(call, callback) {
 }
 
 /**
- * return Ratings
+ * returns rating for specific product and returns an object containing average and number of reviews
  */
 function getRatings(call, callback) {
   logger.info('received ratings request');

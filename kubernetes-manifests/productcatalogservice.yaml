@@ -29,6 +29,7 @@ spec:
       containers:
       - name: server
         image: productcatalogservice
+        imagePullPolicy: Always
         ports:
         - containerPort: 3550
         env:

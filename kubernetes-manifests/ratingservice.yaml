@@ -29,6 +29,7 @@ spec:
       containers:
       - name: server
         image: ratingservice
+        imagePullPolicy: Always
         ports:
         - name: grpc
           containerPort: 7000

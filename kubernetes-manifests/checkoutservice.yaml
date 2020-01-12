@@ -28,6 +28,7 @@ spec:
       containers:
         - name: server
           image: checkoutservice
+          imagePullPolicy: Always
           ports:
           - containerPort: 5050
           readinessProbe:

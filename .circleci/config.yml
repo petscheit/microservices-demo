@@ -23,6 +23,7 @@ jobs:
       - run: gcloud builds submit --config=cloudbuild.yaml
       # generates new release artifacts
       - run: TAG=latest REPO_PREFIX=gcr.io/hipstershop-264010 ./hack/make-release-artifacts.sh
+      - run: cat release/kubernetes-manifests.yaml
       # Triggers Kubernetes to check for new releases and deploy these
       - run: kubectl apply -f release/kubernetes-manifests.yaml
 workflows:

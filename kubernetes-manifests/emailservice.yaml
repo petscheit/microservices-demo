@@ -29,6 +29,7 @@ spec:
       containers:
       - name: server
         image: emailservice
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:

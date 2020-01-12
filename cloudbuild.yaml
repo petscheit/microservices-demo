@@ -5,7 +5,12 @@ steps:
   args: 
   - '-c'
   - > 
-    gsutil cp gs://hipstershop-cache/cache ../root/cache && skaffold build --cache-artifacts --cache-file=../root/cache --default-repo=gcr.io/hipstershop-264010 && gsutil cp ../root/cache gs://hipstershop-cache/cache;
+    # copies caching hash file from google storage bucket
+    gsutil cp gs://hipstershop-cache/cache ../root/cache && \
+    # builds new images with skaffold
+    skaffold build --cache-artifacts --cache-file=../root/cache --default-repo=gcr.io/hipstershop-264010 && \ 
+    # uploads and overwrites new caching hash file
+    gsutil cp ../root/cache gs://hipstershop-cache/cache;
 timeout: '3600s'
 options:
   machineType: 'N1_HIGHCPU_32'

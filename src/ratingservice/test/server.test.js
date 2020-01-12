@@ -34,13 +34,14 @@ describe('GetRatings Testing', function () {
             rating.average.should.equal(3.5);
         });
     });
-    it('should return undefined for invalid productId', function () {
+    it('should return default ratingMetaItem for unknown productId', function () {
         getRatings({
             request: {
                 product_id: 'XXX'
             }
         }, (_, rating) => {
-            should.equal(rating, undefined);
+            rating.amount.should.equal(0);
+            rating.average.should.equal(0);
         });
     });
 });

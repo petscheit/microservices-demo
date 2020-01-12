@@ -1,12 +1,18 @@
 version: 2.1
 jobs:
+  test:
+    docker: 
+      - image: circleci/node
+    steps:
+      - checkout
+      - run: cd src/ratingservice/ && npm install
+      - run: cd src/ratingservice/ && npm test
   deploy:
     docker:
       - image: google/cloud-sdk
     steps:
       - checkout
       # executes tests for ratingservice
-      - run: cd src/ratingservice/ && npm install && npm test && cd ../../
       # creates api key json file from base64 encoded env
       - run: echo $GCP_PROJECT_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
       # authenticates at GCP
@@ -23,4 +29,7 @@ workflows:
   version: 2.1
   main:
     jobs:
-      - deploy
+      - test
+      - deploy:
+          requires:
+            - test

@@ -1,28 +1,27 @@
 version: 2.1
 jobs:
   deploy:
+    branches:
+      only:
+        - master
     docker:
       - image: google/cloud-sdk
     steps:
       - checkout
+      # creates api key json file from base64 encoded env
       - run: echo $GCP_PROJECT_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
+      # authenticates at GCP
       - run: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json --project $GOOGLE_PROJECT_ID
       - run: gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       - run: gcloud container clusters get-credentials $CLUSTER_NAME
+      # submit build job to google cloud build
       - run: gcloud builds submit --config=cloudbuild.yaml
+      # generates new release artifacts
       - run: TAG=latest REPO_PREFIX=gcr.io/hipstershop-264010 ./hack/make-release-artifacts.sh
-      - run: cat release/kubernetes-manifests.yaml
+      # Triggers Kubernetes to check for new releases and deploy these
       - run: kubectl apply -f release/kubernetes-manifests.yaml
 workflows:
   version: 2.1
   main:
     jobs:
       - deploy
-
-
-
-          # kubectl create secret docker-registry gcr-access-token --docker-server=gcr.io --docker-username=oauth3accesstoken --docker-password="$(gcloud auth print-access-token)" --docker-email=any@valid.email
-          # kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "gcr-access-token"}]}'
-      # kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
-# kubectl create secret docker-registry gcr-json-key --docker-server=gcr.io --docker-username=_json_key --docker-password="$(cat ../../../Desktop/hs.json)" --docker-email=any@valid.email
-# kubectl patch serviceaccount default -p '{"imagePullSecrets": [{"name": "gcr-json-key"}]}'
